@@ -1,8 +1,0 @@
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/exampleB1.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/B1.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/edit_cache.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/rebuild_cache.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/list_install_components.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/install.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/install/local.dir
-/home/geant4/geant4_workspace/B1_PIPS/build/CMakeFiles/install/strip.dir
