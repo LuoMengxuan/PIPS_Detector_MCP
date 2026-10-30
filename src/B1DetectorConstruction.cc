@@ -99,8 +99,8 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
  
   //所有尺寸参数
     //====不同探测器更改此处参数====
-  G4double Active_Area = 450 * mm *mm;
-  G4double Junction_Area = 531 * mm * mm;
+  G4double Active_Area = 1700 * mm *mm;
+  G4double Junction_Area = 1900 * mm * mm;
   G4double Si_outer =5.0 *mm;
     //====不同探测器更改此处参数====
     //Si芯片为圆柱体，厚度统一为325um

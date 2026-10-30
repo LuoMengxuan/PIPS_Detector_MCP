@@ -69,9 +69,9 @@ void B1SteppingAction::UserSteppingAction(const G4Step* step)
   // check if we are in scoring volume
   if (volume == fScoringVolume){
     G4Track *track = step->GetTrack();
-    G4double kinE = track->GetKineticEnergy();
-    G4double kinE_MeV = kinE / CLHEP::keV;
-    if(kinE_MeV > 0.0 ){
+    G4double E = track->GetTotalEnergy();
+    G4double E_keV = E / CLHEP::keV;
+    if(E_keV > 0.0 ){
       fEventAction->FindEvent();
     }
     else

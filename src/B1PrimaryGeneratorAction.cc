@@ -53,12 +53,15 @@ B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
   // default particle kinematic
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
   G4String particleName;
+  //G4ParticleDefinition* particle
+    //= particleTable->FindParticle(particleName="e-");
   G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="e-");
+    = particleTable->FindParticle(particleName="alpha");
   fParticleGun->SetParticleDefinition(particle);
   //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.0));
   //设置5MeV
-  fParticleGun->SetParticleEnergy(0.546*MeV*G4UniformRand());
+  //fParticleGun->SetParticleEnergy(0.546*MeV*G4UniformRand());//电子能量 连续的0-0.546
+  fParticleGun->SetParticleEnergy(5.0*MeV);//α粒子能量
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -82,7 +85,7 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   //设置源的性质，直径为24mm的面源，距离z=0为Source_lengt的距离
   G4double Source_diameter = 24 *mm;
   G4double Source_radius = Source_diameter/2;
-  G4double Source_length = 6 * mm;
+  G4double Source_length = 10 * mm;
 
   G4double r = Source_radius * std::sqrt(G4UniformRand());
   G4double theta = 2 * CLHEP::pi * G4UniformRand();
