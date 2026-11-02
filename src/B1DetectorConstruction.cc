@@ -75,7 +75,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   //
   G4double world_sizeXY = 2.0*env_sizeXY;
   G4double world_sizeZ  = 2.0*env_sizeZ;
-  G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
+  G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
   
   G4Box* solidWorld =    
     new G4Box("World",                       //its name
@@ -124,7 +124,12 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   G4double Fe_outer = Si_outer + 1.0*mm;
   G4double Fe_Radius =   Junction_Radius + Fe_outer;
   G4double Fe_Thickness = 0.5 * mm;
-  G4Material* Fe_mat = nist->FindOrBuildMaterial("G4_Fe");
+  //定义一个不锈钢材料 Fe_mat,Fe:72%、Cr:18%、Ni:10%
+  G4double density = 7.93 * g/cm3;
+  G4Material* Fe_mat = new G4Material("Fe", density, 3);
+  Fe_mat->AddElement(nist->FindOrBuildElement("Fe"), 72*perCent);
+  Fe_mat->AddElement(nist->FindOrBuildElement("Cr"), 18*perCent);
+  Fe_mat->AddElement(nist->FindOrBuildElement("Ni"), 10*perCent);
   G4ThreeVector pos_Fe = G4ThreeVector(0, 0, -Fe_Thickness/2);
     //外层不锈钢为圆柱体，厚度为0.5mm，半径为芯片半径+5mm
   G4Tubs* solidFe =    
