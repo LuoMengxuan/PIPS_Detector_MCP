@@ -43,12 +43,16 @@ class G4LogicalVolume;
 class B1DetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
-    B1DetectorConstruction();
+    B1DetectorConstruction(G4double Active_Area, G4double Junction_Area);
     virtual ~B1DetectorConstruction();
 
     virtual G4VPhysicalVolume* Construct();
     
     G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
+
+  private:
+    G4double fActive_Area;
+    G4double fJunction_Area;
 
   protected:
     G4LogicalVolume*  fScoringVolume;

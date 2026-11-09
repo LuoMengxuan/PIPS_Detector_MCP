@@ -27,7 +27,7 @@
 //
 /// \file B1ActionInitialization.hh
 /// \brief Definition of the B1ActionInitialization class
-
+#include "globals.hh"
 #ifndef B1ActionInitialization_h
 #define B1ActionInitialization_h 1
 
@@ -38,11 +38,15 @@
 class B1ActionInitialization : public G4VUserActionInitialization
 {
   public:
-    B1ActionInitialization();
+    B1ActionInitialization(G4String ptcName, G4double sourceLength, G4double sourcediameter);
     virtual ~B1ActionInitialization();
 
     virtual void BuildForMaster() const;
     virtual void Build() const;
+  private:
+    G4String fPtcName;
+    G4double fSourceLength;
+    G4double fSourceDiameter;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

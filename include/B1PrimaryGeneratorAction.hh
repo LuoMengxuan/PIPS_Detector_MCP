@@ -48,7 +48,7 @@ class G4Box;
 class B1PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
-    B1PrimaryGeneratorAction();    
+    B1PrimaryGeneratorAction(G4String ptcName,G4double sourceLength,G4double sourcediameter);    
     virtual ~B1PrimaryGeneratorAction();
 
     // method from the base class
@@ -60,6 +60,9 @@ class B1PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   private:
     G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
     G4Box* fEnvelopeBox;
+    G4String fPtcName;
+    G4double fSourceLength;
+    G4double fSourceDiameter;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

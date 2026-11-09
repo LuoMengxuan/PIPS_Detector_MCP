@@ -51,11 +51,42 @@ int main(int argc,char** argv)
 {
   // Detect interactive mode (if no arguments) and define UI session
   //
+  //设置初始化的参数
   G4UIExecutive* ui = 0;
+  G4double activeArea = 1700 ;//结构参数化
+  G4double junctionArea = 1900 ;
+    //源
+  G4String ptcName = "e-";
+  G4double sourcediameter = 24;
+  G4double sourcelength = 2;
+
+  for(G4int i = 0; i < argc; i++)
+  {
+    if(G4String(argv[i]) == "-A")//activeArea
+    {
+      activeArea =atof(argv[i+1]);
+    }
+    else if(G4String(argv[i]) == "-J")//Junc_Area
+    {
+      junctionArea = atof(argv[i+1]);
+    }
+    else if(G4String(argv[i]) == "-N")//particle name
+    {
+      ptcName = argv[i+1];
+    }
+    else if(G4String(argv[i]) == "-L")//source_length
+    {
+      sourcelength =atof(argv[i+1]) ;
+    }
+    else if(G4String(argv[i]) == "-D")//source_diameter
+    {
+      sourcediameter =atof(argv[i+1]) ;
+    }
+  }
+  //设置初始化的参数
   if ( argc == 1 ) {
     ui = new G4UIExecutive(argc, argv);
   }
-
   // Choose the Random engine
   G4Random::setTheEngine(new CLHEP::RanecuEngine);
   
@@ -70,7 +101,9 @@ int main(int argc,char** argv)
   // Set mandatory initialization classes
   //
   // Detector construction
-  runManager->SetUserInitialization(new B1DetectorConstruction());
+  //runManager->SetUserInitialization(new B1DetectorConstruction());
+  runManager->SetUserInitialization(new B1DetectorConstruction(activeArea,junctionArea));
+  
 
   // Physics list
   G4VModularPhysicsList* physicsList = new QBBC;
@@ -78,8 +111,7 @@ int main(int argc,char** argv)
   runManager->SetUserInitialization(physicsList);
     
   // User action initialization
-  runManager->SetUserInitialization(new B1ActionInitialization());
-  
+  runManager->SetUserInitialization(new B1ActionInitialization(ptcName,sourcelength,sourcediameter));
   // Initialize visualization
   //
   G4VisManager* visManager = new G4VisExecutive;
@@ -95,7 +127,7 @@ int main(int argc,char** argv)
   if ( ! ui ) { 
     // batch mode
     G4String command = "/control/execute ";
-    G4String fileName = argv[1];
+    G4String fileName = argv[argc-1];
     UImanager->ApplyCommand(command+fileName);
   }
   else { 
