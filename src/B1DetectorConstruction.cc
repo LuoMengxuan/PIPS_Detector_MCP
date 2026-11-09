@@ -41,7 +41,7 @@
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4Tubs.hh"
-
+#include "B1RunAction.hh"
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B1DetectorConstruction::B1DetectorConstruction(G4double activeArea, G4double junctionArea)
@@ -315,7 +315,6 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                                                     checkOverlaps);
   */
   fScoringVolume = logicSensitive;
-  
   //
   //always return the physical World
   //

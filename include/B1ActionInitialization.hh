@@ -38,7 +38,7 @@
 class B1ActionInitialization : public G4VUserActionInitialization
 {
   public:
-    B1ActionInitialization(G4String ptcName, G4double sourceLength, G4double sourcediameter);
+    B1ActionInitialization(G4double activeArea, G4double junctionArea, G4String ptcName, G4double sourceLength, G4double sourcediameter);
     virtual ~B1ActionInitialization();
 
     virtual void BuildForMaster() const;
@@ -47,6 +47,8 @@ class B1ActionInitialization : public G4VUserActionInitialization
     G4String fPtcName;
     G4double fSourceLength;
     G4double fSourceDiameter;
+    G4double fActiveArea;
+    G4double fJunctionArea;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

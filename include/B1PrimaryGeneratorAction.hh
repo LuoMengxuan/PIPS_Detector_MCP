@@ -35,11 +35,9 @@
 #include "G4ParticleGun.hh"
 #include "globals.hh"
 #include <cmath>
-
 class G4ParticleGun;
 class G4Event;
 class G4Box;
-
 /// The primary generator action class with particle gun.
 ///
 /// The default kinematic is a 6 MeV gamma, randomly distribued 

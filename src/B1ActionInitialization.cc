@@ -36,8 +36,10 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-B1ActionInitialization::B1ActionInitialization(G4String ptcName, G4double sourceLength, G4double sourcediameter)
+B1ActionInitialization::B1ActionInitialization(G4double activeArea, G4double junctionArea, G4String ptcName, G4double sourceLength, G4double sourcediameter)
  : G4VUserActionInitialization(), 
+ fActiveArea(activeArea),
+ fJunctionArea(junctionArea),
  fPtcName(ptcName),
  fSourceLength(sourceLength),
  fSourceDiameter(sourcediameter)
@@ -52,7 +54,7 @@ B1ActionInitialization::~B1ActionInitialization()
 
 void B1ActionInitialization::BuildForMaster() const
 {
-  B1RunAction* runAction = new B1RunAction;
+  B1RunAction* runAction = new B1RunAction(fActiveArea, fJunctionArea, fPtcName, fSourceLength, fSourceDiameter);
   SetUserAction(runAction);
 }
 
@@ -62,7 +64,7 @@ void B1ActionInitialization::Build() const
 {
   SetUserAction(new B1PrimaryGeneratorAction(fPtcName, fSourceLength, fSourceDiameter));
 
-  B1RunAction* runAction = new B1RunAction;
+  B1RunAction* runAction = new B1RunAction(fActiveArea, fJunctionArea, fPtcName, fSourceLength, fSourceDiameter);
   SetUserAction(runAction);
   
   B1EventAction* eventAction = new B1EventAction(runAction);

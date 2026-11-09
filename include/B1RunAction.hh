@@ -46,7 +46,9 @@ class G4Run;
 class B1RunAction : public G4UserRunAction
 {
   public:
-    B1RunAction();
+    B1RunAction(G4double activeArea, G4double junctionArea,
+            G4String ptcName, G4double sourceLength,
+            G4double sourcediameter);
     virtual ~B1RunAction();
 
     // virtual G4Run* GenerateRun();
@@ -57,6 +59,11 @@ class B1RunAction : public G4UserRunAction
 
   private:
     G4Accumulable<G4int> NCount;
+    G4double fActive_Area;
+    G4double fJunction_Area;
+    G4String fPtcName;
+    G4double fSourceLength;
+    G4double fSourceDiameter;
 };
 
 #endif

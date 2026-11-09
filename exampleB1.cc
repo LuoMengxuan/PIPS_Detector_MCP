@@ -111,7 +111,7 @@ int main(int argc,char** argv)
   runManager->SetUserInitialization(physicsList);
     
   // User action initialization
-  runManager->SetUserInitialization(new B1ActionInitialization(ptcName,sourcelength,sourcediameter));
+  runManager->SetUserInitialization(new B1ActionInitialization(activeArea,junctionArea,ptcName,sourcelength,sourcediameter));
   // Initialize visualization
   //
   G4VisManager* visManager = new G4VisExecutive;

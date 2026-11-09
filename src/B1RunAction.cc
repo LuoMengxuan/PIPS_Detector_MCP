@@ -31,6 +31,8 @@
 #include "B1RunAction.hh"
 #include "B1PrimaryGeneratorAction.hh"
 #include "B1DetectorConstruction.hh"
+#include "iostream"
+#include "fstream"
 // #include "B1Run.hh"
 
 #include "G4RunManager.hh"
@@ -43,22 +45,27 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-B1RunAction::B1RunAction()
+B1RunAction::B1RunAction(G4double activeArea, G4double junctionArea, G4String ptcName, G4double sourceLength, G4double sourcediameter)
 : G4UserRunAction(),
-  NCount(0)
+  NCount(0),
+  fActive_Area(activeArea),
+  fJunction_Area(junctionArea),
+  fPtcName(ptcName),
+  fSourceLength(sourceLength),
+  fSourceDiameter(sourcediameter)
 {
   G4AccumulableManager::Instance()->Register(NCount);
   // add new units for dose
   // 
-  const G4double milligray = 1.e-3*gray;
-  const G4double microgray = 1.e-6*gray;
-  const G4double nanogray  = 1.e-9*gray;  
-  const G4double picogray  = 1.e-12*gray;
+  // const G4double milligray = 1.e-3*gray;
+  // const G4double microgray = 1.e-6*gray;
+  // const G4double nanogray  = 1.e-9*gray;  
+  // const G4double picogray  = 1.e-12*gray;
    
-  new G4UnitDefinition("milligray", "milliGy" , "Dose", milligray);
-  new G4UnitDefinition("microgray", "microGy" , "Dose", microgray);
-  new G4UnitDefinition("nanogray" , "nanoGy"  , "Dose", nanogray);
-  new G4UnitDefinition("picogray" , "picoGy"  , "Dose", picogray); 
+  // new G4UnitDefinition("milligray", "milliGy" , "Dose", milligray);
+  // new G4UnitDefinition("microgray", "microGy" , "Dose", microgray);
+  // new G4UnitDefinition("nanogray" , "nanoGy"  , "Dose", nanogray);
+  // new G4UnitDefinition("picogray" , "picoGy"  , "Dose", picogray); 
 
   // Register accumulable to the accumulable manager
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
@@ -126,6 +133,15 @@ void B1RunAction::EndOfRunAction(const G4Run* run)
     G4cout
      << G4endl
      << "--------------------End of Global Run-----------------------";
+     std::ofstream outfile("Result.txt", std::ios::app);
+     outfile<<"--------------------End of Global Run-----------------------"<<std::endl;
+     outfile<<"探测器参数: 有效面积为 "<< fActive_Area << " mm^2,结面积为 "<< fJunction_Area << " mm^2"<<std::endl;
+     outfile<<"源参数: 粒子为 "<< fPtcName << ",源直径为 "<< fSourceDiameter << " mm,源长度为 "<< fSourceLength << " mm"<<std::endl;
+     outfile << " 总事件数为 " << nofEventsToBeProcessed << "次 "<< runCondition << std::endl;
+     outfile << " 已处理事件数为 " << nofEvents << "次 "<< runCondition << std::endl;
+     outfile << " 被探测到: "  << count << "次 "<< runCondition << std::endl;
+     outfile << "探测效率----" << (count / static_cast<double>(nofEventsToBeProcessed)) * 100 << "%" << std::endl;
+     outfile << std::endl;
   }
   else {
     G4cout
